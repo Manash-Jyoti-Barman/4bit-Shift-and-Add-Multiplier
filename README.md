@@ -1,4 +1,13 @@
-# 4-Bit Sequential Shift-and-Add Multiplier in Verilog
+# 4-Bit Sequential Shift-and-Add Multiplier
+
+> Structural Verilog | Controller–Datapath Architecture | FSM Design | Xilinx Vivado | FPGA (ZedBoard)
+
+A structural Verilog implementation of a 4-bit sequential shift-and-add multiplier based on a controller–datapath architecture. The design was functionally verified through simulation and successfully implemented on the Xilinx ZedBoard.
+
+![Verilog](https://img.shields.io/badge/Language-Verilog-blue)
+&emsp; ![Vivado](https://img.shields.io/badge/Tool-Xilinx%20Vivado-red)
+&emsp; ![FPGA](https://img.shields.io/badge/Target-ZedBoard-green)
+&emsp; ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ## Overview
 
@@ -156,3 +165,64 @@ The design was functionally verified using a Verilog testbench. The simulation c
 
 <p align="center"><em>Figure 9. Post-implementationTiming waveform of the 4-bit sequential shift-and-add multiplier.</em></p>
 
+## FPGA Implementation
+
+Following functional verification, the design was synthesized and implemented using **Xilinx Vivado Design Suite** targeting the **Xilinx ZedBoard** FPGA. The implementation flow included synthesis, placement, routing, timing analysis, and power estimation. The implementation reports are summarized below.
+
+Implementation Summary
+
+| Metric | Result |
+|---------|---------|
+| LUTs | 16 |
+| FFs | 22 |
+| WNS | 0.026 ns |
+| Dynamic Power | 11 mW |
+| Total Power | 117 mW |
+
+### Resource Utilization
+
+<p align="center">
+  <img src="images/utilization.png" alt="Resource Utilization" width="700"/>
+</p>
+
+<p align="center"><em>Figure 10. Post-synthesis resource utilization summary.</em></p>
+
+The resource utilization report indicates that the design occupies only a small fraction of the available FPGA resources. The implementation uses **16 LUTs (0.03%)**, **22 Flip-Flops (0.02%)**, and **19 I/O pins (9.5%)** of the target device. The extremely low utilization demonstrates the area-efficient nature of the sequential controller–datapath architecture, where hardware resources are reused across multiple clock cycles instead of being replicated.
+
+---
+
+### Timing Analysis
+
+<p align="center">
+  <img src="images/timing.png" alt="Timing Summary" width="700"/>
+</p>
+
+<p align="center"><em>Figure 11. Post-implementation timing summary.</em></p>
+
+The timing analysis confirms that the implemented design satisfies all specified timing constraints. The design achieves a **Worst Negative Slack (WNS) of 0.026 ns**, **Worst Hold Slack (WHS) of 0.256 ns**, and **Worst Pulse Width Slack (WPWS) of 7.000 ns**, with **zero failing endpoints** for setup, hold, and pulse-width checks. These results verify that the controller and datapath operate synchronously and that the design meets the required timing specifications.
+
+---
+
+### Power Analysis
+
+<p align="center">
+  <img src="images/power.png" alt="Power Summary" width="700"/>
+</p>
+
+<p align="center"><em>Figure 12. Estimated power consumption after implementation.</em></p>
+
+The Vivado power analysis estimates a **total on-chip power consumption of 0.117 W**, comprising **0.106 W of static power** and **0.011 W of dynamic power**. The low dynamic power consumption reflects the efficiency of the sequential implementation, where arithmetic hardware is reused over multiple clock cycles rather than duplicated for parallel execution.
+
+---
+
+### Hardware Validation
+
+The generated bitstream was successfully programmed onto the **Xilinx ZedBoard**, demonstrating the correct hardware implementation of the 4-bit sequential shift-and-add multiplier.
+<p align="center">
+  <img src="images/zedboard-front.jpg" alt="Zedboard" width="800"/>
+</p>
+
+## References
+
+1. R. S. Gaonkar,
+   *Microprocessor Architecture, Programming, and Applications with the 8085.*
